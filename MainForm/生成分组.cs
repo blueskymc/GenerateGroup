@@ -2624,7 +2624,7 @@ namespace MainForm
             string txtName = verifyInput();
             if (string.IsNullOrEmpty(txtName))
                 return;
-            using (StreamWriter sw = new StreamWriter(string.Format("学员\\{0}.txt", txtName), false, encode))
+            using (StreamWriter sw = new StreamWriter(string.Format("学员\\{0}.csv", txtName), false, encode))
                 foreach (DataGridViewRow row in dataGvUserConfig.Rows)
                 {
                     if (row.Cells[0].Value != null && row.Cells[1].Value != null)
