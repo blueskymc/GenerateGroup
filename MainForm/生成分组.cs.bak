@@ -2624,9 +2624,7 @@ namespace MainForm
             string txtName = verifyInput();
             if (string.IsNullOrEmpty(txtName))
                 return;
-            using (StreamWriter sw = new StreamWriter(string.Format("学员\\{0}.csv", txtName), false, encode))
-            {
-                sw.WriteLine("登录账号,姓名,所在分组");
+            using (StreamWriter sw = new StreamWriter(string.Format("学员\\{0}.txt", txtName), false, encode))
                 foreach (DataGridViewRow row in dataGvUserConfig.Rows)
                 {
                     if (row.Cells[0].Value != null && row.Cells[1].Value != null)
@@ -2664,7 +2662,6 @@ namespace MainForm
                         row.Selected = true;
                     }
                 }
-            }
 
             MessageBox.Show("已存入学员信息，请关闭该程序！");
         }
