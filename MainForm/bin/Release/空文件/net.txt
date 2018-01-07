@@ -1,0 +1,19 @@
+#define NET_CON_MAX 10
+// Here define some Net Configuration
+typedef struct
+{
+  char Type[4];  // 3个字符的类型描述，如DCS/DEH/AUX/VIR
+  char desc[16]; //描述信息
+  int NetPort;
+  int pva_size;
+  int pvd_size;
+  int pvi_size;
+}NET_TYPE_STRUCT;
+typedef struct
+{
+   // host information
+   char HostName[20];
+   char HostIpAddress[20];
+   int  net_num; //当前文件中存储的网络类型结构的个数
+}NET_HEAD;
+//
