@@ -2621,73 +2621,88 @@ namespace MainForm
         private void buttonItem21_Click(object sender, EventArgs e)
         {
             dataGvUserConfig.EndEdit();
-            foreach (DataGridViewRow row in dataGvUserConfig.Rows)
-            {
-                if (row.Cells[0].Value != null && row.Cells[1].Value != null)
+            string txtName = verifyInput();
+            if (string.IsNullOrEmpty(txtName))
+                return;
+            using (StreamWriter sw = new StreamWriter(string.Format("学员\\{0}.txt", txtName), false, encode))
+                foreach (DataGridViewRow row in dataGvUserConfig.Rows)
                 {
-                    UserConfigClass uc = new UserConfigClass();
-                    uc.loginId = row.Cells[0].Value.ToString();
-                    uc.name = row.Cells[1].Value.ToString();
-                    int sid = OperateDbSem.GetStudentIdByName(uc.name);
-                    if (sid > 0)
+                    if (row.Cells[0].Value != null && row.Cells[1].Value != null)
                     {
-                        MessageBox.Show("已存在学员名：" + uc.name + "；请重新输入");
+                        string modelName = string.Empty;
+                        if (row.Cells[2].Value != null)
+                            modelName = row.Cells[2].Value.ToString();
+                        UserConfigClass uc = new UserConfigClass();
+                        uc.loginId = row.Cells[0].Value.ToString();
+                        uc.name = row.Cells[1].Value.ToString();
+                        uc.modelName = modelName;
+                        int sid = OperateDbSem.GetStudentIdByName(uc.name);
+                        if (sid > 0)
+                        {
+                            MessageBox.Show("已存在学员名：" + uc.name + "；请重新输入");
+                        }
+                        int uid = OperateDbSem.GetUserIdByUid(uc.loginId);
+                        if (uid > 0)
+                        {
+                            MessageBox.Show("已存在学员登录号：" + uc.loginId + "；请重新输入");
+                        }
+                        try
+                        {
+                            OperateDbSem.InsertToSql(uc);
+                            sw.WriteLine(string.Format("{0},{1},{2}", uc.loginId, uc.name, uc.modelName));
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                    else if (dataGvUserConfig.Rows.IndexOf(row) != dataGvUserConfig.Rows.Count - 1)
+                    {
+                        MessageBox.Show("学员登录号和学员名不能为空");
                         row.Selected = true;
-                        return;
-                    }
-                    int uid = OperateDbSem.GetUserIdByUid(uc.loginId);
-                    if (uid > 0)
-                    {
-                        MessageBox.Show("已存在学员登录号：" + uc.loginId + "；请重新输入");
-                        row.Selected = true;
-                        return;
                     }
                 }
-                else if (dataGvUserConfig.Rows.IndexOf(row) != dataGvUserConfig.Rows.Count - 1)
-                {
-                    MessageBox.Show("学员登录号和学员名不能为空");
-                    row.Selected = true;
-                    return;
-                }
-            }
-            foreach (DataGridViewRow row in dataGvUserConfig.Rows)
-            {
-                if (row.Cells[0].Value != null && row.Cells[1].Value != null)
-                {
-                    string modelName = string.Empty;
-                    if (row.Cells[2].Value != null)
-                        modelName = row.Cells[2].Value.ToString();
-                    UserConfigClass uc = new UserConfigClass();
-                    uc.loginId = row.Cells[0].Value.ToString();
-                    uc.name = row.Cells[1].Value.ToString();
-                    uc.modelName = modelName;
-                    int sid = OperateDbSem.GetStudentIdByName(uc.name);
-                    if (sid > 0)
-                    {
-                        MessageBox.Show("已存在学员名：" + uc.name + "；请重新输入");
-                    }
-                    int uid = OperateDbSem.GetUserIdByUid(uc.loginId);
-                    if (uid > 0)
-                    {
-                        MessageBox.Show("已存在学员登录号：" + uc.loginId + "；请重新输入");
-                    }
-                    try
-                    {
-                        OperateDbSem.InsertToSql(uc);
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show(ex.Message);
-                    }
-                }
-                else if (dataGvUserConfig.Rows.IndexOf(row) != dataGvUserConfig.Rows.Count - 1)
-                {
-                    MessageBox.Show("学员登录号和学员名不能为空");
-                    row.Selected = true;
-                }
-            }
 
             MessageBox.Show("已存入学员信息，请关闭该程序！");
+        }
+
+        private string verifyInput()
+        {
+            string headName = string.Empty;
+            int index = 0;
+            foreach (DataGridViewRow row in dataGvUserConfig.Rows)
+            {
+                if (row.Cells[0].Value != null && row.Cells[1].Value != null)
+                {
+                    UserConfigClass uc = new UserConfigClass();
+                    uc.loginId = row.Cells[0].Value.ToString();
+                    uc.name = row.Cells[1].Value.ToString();
+                    if (index == 0)
+                        headName = uc.loginId;
+                    int sid = OperateDbSem.GetStudentIdByName(uc.name);
+                    if (sid > 0)
+                    {
+                        MessageBox.Show("已存在学员名：" + uc.name + "；请重新输入");
+                        row.Selected = true;
+                        headName = null;
+                    }
+                    int uid = OperateDbSem.GetUserIdByUid(uc.loginId);
+                    if (uid > 0)
+                    {
+                        MessageBox.Show("已存在学员登录号：" + uc.loginId + "；请重新输入");
+                        row.Selected = true;
+                        headName = null;
+                    }
+                }
+                else if (dataGvUserConfig.Rows.IndexOf(row) != dataGvUserConfig.Rows.Count - 1)
+                {
+                    MessageBox.Show("学员登录号和学员名不能为空");
+                    row.Selected = true;
+                    headName = null;
+                }
+                index++;
+            }
+            return headName;
         }
 
         private void buttonItem22_Click(object sender, EventArgs e)
