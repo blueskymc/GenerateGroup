@@ -8,8 +8,8 @@ namespace MainForm
 {
     public class OperateDbSem
     {
-        //public static string Conn = "Database='db_sem';Data Source='localhost';User Id='root';Password='sinosimu';charset='utf8';pooling=true";
-        public static string Conn = "Database='db_sem';Data Source='localhost';User Id='root';Password='123456';charset='utf8';pooling=true";
+        public static string Conn = "Database='db_sem';Data Source='localhost';User Id='root';Password='sinosimu';charset='utf8';pooling=true";
+        //public static string Conn = "Database='db_sem';Data Source='localhost';User Id='root';Password='123456';charset='utf8';pooling=true";
 
         public static List<string> GetModelNames()
         {

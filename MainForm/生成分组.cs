@@ -2641,7 +2641,7 @@ namespace MainForm
                         int sid = OperateDbSem.GetStudentIdByName(uc.name);
                         if (sid > 0)
                         {
-                            MessageBox.Show("已存在学员名：" + uc.name + "；请重新输入");
+                            //MessageBox.Show("已存在学员名：" + uc.name + "；请重新输入");
                         }
                         int uid = OperateDbSem.GetUserIdByUid(uc.loginId);
                         if (uid > 0)
@@ -2685,9 +2685,9 @@ namespace MainForm
                     int sid = OperateDbSem.GetStudentIdByName(uc.name);
                     if (sid > 0)
                     {
-                        MessageBox.Show("已存在学员名：" + uc.name + "；请重新输入");
-                        row.Selected = true;
-                        headName = null;
+                        //MessageBox.Show("已存在学员名：" + uc.name + "；请重新输入");
+                        //row.Selected = true;
+                        //headName = null;
                     }
                     int uid = OperateDbSem.GetUserIdByUid(uc.loginId);
                     if (uid > 0)
