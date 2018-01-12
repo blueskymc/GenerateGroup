@@ -600,6 +600,7 @@ namespace MainForm
         {
             for (int i = 0; i < addGroupCount - 1; i++)
             {
+                int rowIndex = 0;
                 foreach (LocalProgramClass lpLast in lastParam.LocalProgramList)
                 {
                     LocalProgramClass lp = new LocalProgramClass();
@@ -609,7 +610,7 @@ namespace MainForm
                     lp.path = lpLast.path;
                     lp.parameter = lpLast.parameter;
                     lp.monnetpc = lpLast.monnetpc;
-                    lp.port = addPort(lpLast.port, i + 1);
+                    lp.port = addPort(lpLast.port, i + 1, rowIndex++);
                     lp.maxpva = lpLast.maxpva;
                     lp.maxpvd = lpLast.maxpvd;
                     lp.netdisp = lpLast.netdisp;
@@ -753,17 +754,49 @@ namespace MainForm
             return value;
         }
 
-        private string addPort(string str, int groupIndex)
+        private string addPort(string str, int groupIndex, int rowIndex)
         {
+            bool 达旗辅网添加就地 = false;
             if (string.IsNullOrEmpty(str))
                 throw new Exception("存在空端口号或空行，请重新配置");
-            int num = int.Parse(str.Substring(1, 2));
-            num += groupIndex;
-            if (num > 99)//限定增长序号不能大于99
+            if (checkBoxAdd2.Checked)
             {
-                num -= 100;
+                //if (达旗辅网添加就地)
+                //{
+                //    if (rowIndex < 3)
+                //    {
+                //        int num = int.Parse(str.Substring(1, 2));
+                //        num += groupIndex;
+                //        if (num > 99)//限定增长序号不能大于99
+                //        {
+                //            num -= 100;
+                //        }
+                //        return mdlIndex.ToString() + num.ToString("00") + str.Remove(0, 3);
+                //    }
+                //    else
+                //    {
+                //        int num = groupIndex * 2;
+                //        int oldPort = int.Parse(str);
+                //        return (num + oldPort).ToString();
+                //    }
+                //}
+                //else
+                {
+                    int num = groupIndex * 2 * dataGridViewX6.Rows.Count;
+                    int oldPort = int.Parse(str);
+                    return (num + oldPort).ToString();
+                }
             }
-            return mdlIndex.ToString() + num.ToString("00") + str.Remove(0, 3);
+            else
+            {
+                int num = int.Parse(str.Substring(1, 2));
+                num += groupIndex;
+                if (num > 99)//限定增长序号不能大于99
+                {
+                    num -= 100;
+                }
+                return mdlIndex.ToString() + num.ToString("00") + str.Remove(0, 3);
+            }
         }
 
         private void bindData()
@@ -1511,18 +1544,20 @@ namespace MainForm
                             else
                                 break;
                         }
+                        int rowIndex = 0;
                         foreach (DataRow row in tablesTmp.dtLocalSetting.Rows)
                         {
                             if (string.Equals(typeNet.Trim(), row[0].ToString(), StringComparison.OrdinalIgnoreCase))
                             {
                                 int portTmp = ns.NetPort;
 
-                                if (!int.TryParse(addPort(row[5].ToString(), i), out portTmp))
+                                if (!int.TryParse(addPort(row[5].ToString(), i, rowIndex), out portTmp))
                                 {
                                     throw new Exception("端口号配置有问题，请检查");
                                 }
                                 ns.NetPort = portTmp;
                             }
+                            rowIndex++;
                         }
                         net.NetList[j] = ns;
                     }
@@ -1628,6 +1663,7 @@ namespace MainForm
             int index = 1;
             for (int i = 0; i < addGroupCount; i++)
             {
+                int rowIndex = 0;
                 foreach (DataRow dr in tablesTmp.dtLocalSetting.Rows)
                 {
                     LocalProgramClass lp = new LocalProgramClass();
@@ -1638,7 +1674,7 @@ namespace MainForm
                     lp.path = addUnuse(dr[3].ToString());
                     lp.parameter = addUnuse(dr[9].ToString());
                     lp.monnetpc = addUnuse(dr[4].ToString());
-                    lp.port = addPort(dr[5].ToString(), i);
+                    lp.port = addPort(dr[5].ToString(), i, rowIndex++);
                     lp.maxpva = dr[6].ToString();
                     lp.maxpvd = dr[7].ToString();
                     lp.netdisp = "\'NO\'";
@@ -2381,8 +2417,8 @@ namespace MainForm
                                 }
                             }
                         }
-                        if (firstList.Count != 6)
-                            MessageBox.Show("选择的data文件夹内以1.开头的文件数目不等于6");
+                        if (firstList.Count < 6)
+                            MessageBox.Show("选择的data文件夹内以1.开头的文件数目小于6，请检查");
                     }
                     else
                     {
