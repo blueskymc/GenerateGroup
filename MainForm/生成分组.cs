@@ -2631,7 +2631,7 @@ namespace MainForm
                 {
                     if (row.Cells[0].Value != null && row.Cells[1].Value != null)
                     {
-                        string modelName = string.Empty;
+                        string modelName = "三期达旗1组";
                         if (row.Cells[2].Value != null)
                             modelName = row.Cells[2].Value.ToString();
                         UserConfigClass uc = new UserConfigClass();
