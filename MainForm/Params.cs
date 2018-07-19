@@ -58,6 +58,9 @@ namespace MainForm
         [XmlElement(ElementName = "一机多模中本模型序号")]
         public string mdlIndex { get; set; }
 
+        [XmlElement(ElementName = "端口号累加2")]
+        public bool portadd2 { get; set; }
+
         public GroupClass()
         {
         }

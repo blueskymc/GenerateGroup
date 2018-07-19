@@ -1033,9 +1033,14 @@ namespace MainForm
         {
             using (StreamWriter sw = new StreamWriter(fileName, false, encode))
             {
+                string lastLine = string.Empty;
                 foreach (string str in textList)
                 {
-                    sw.WriteLine(str);
+                    if (!str.Equals(lastLine, StringComparison.OrdinalIgnoreCase))
+                    {
+                        sw.WriteLine(str);
+                        lastLine = str;
+                    }
                 }
             }
         }
@@ -1374,6 +1379,7 @@ namespace MainForm
             config.Group.groupCount = textBoxItem11.Text;
             config.Group.groupInfo = textBoxItem13.Text;
             config.Group.mdlIndex = textBoxItem14.Text;
+            config.Group.portadd2 = checkBoxAdd2.Checked;
 
             config.hmiCount = textBoxHmiCount.Text;
             if (tablesTmp != null)
@@ -1412,6 +1418,7 @@ namespace MainForm
             textBoxItem11.Text = config.Group.groupCount;
             textBoxItem13.Text = config.Group.groupInfo;
             textBoxItem14.Text = config.Group.mdlIndex;
+            checkBoxAdd2.Checked = config.Group.portadd2;
 
             textBoxHmiCount.Text = config.hmiCount;
             tablesTmp = new Tables();
@@ -1697,8 +1704,10 @@ namespace MainForm
                     LocalRunClass lr = new LocalRunClass();
                     lr.id = index.ToString();
                     lr.fk_gid = (i + 1).ToString();
-                    lr.name = addUnuse(lr.fk_gid.ToString() + "组" + dr[0].ToString());
+                    //SayHi的调用DCS名称里用的是name字段 mc 2018.06.19
+                    //lr.name = addUnuse(lr.fk_gid.ToString() + "组" + dr[0].ToString());
                     lr.description = addSelfGroupName(addUnuse(dr[1].ToString()), i);
+                    lr.name = lr.description;
                     string sqlString = lr.GetText();
                     textList.Add(sqlString);
                     tables.AddLocalRun(sqlString);
@@ -2754,6 +2763,10 @@ namespace MainForm
                 }
                 index++;
             }
+        }
+
+        private void buttonItem19_Click(object sender, EventArgs e)
+        {
         }
     }
 }
