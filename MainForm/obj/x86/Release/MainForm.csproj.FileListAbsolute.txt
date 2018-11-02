@@ -9,3 +9,17 @@ E:\Projects\GenerateGroup\MainForm\obj\x86\Release\MainForm.pdb
 E:\Projects\GenerateGroup\MainForm\bin\Release\MainForm.exe.config
 E:\Projects\GenerateGroup\MainForm\obj\x86\Release\MainForm.MdlListForm.resources
 E:\Projects\GenerateGroup\MainForm\bin\Release\MySql.Data.dll
+E:\0Projects\GenerateGroup\MainForm\bin\Release\MainForm.exe.config
+E:\0Projects\GenerateGroup\MainForm\bin\Release\MainForm.exe
+E:\0Projects\GenerateGroup\MainForm\bin\Release\MainForm.pdb
+E:\0Projects\GenerateGroup\MainForm\bin\Release\DevComponents.DotNetBar2.dll
+E:\0Projects\GenerateGroup\MainForm\bin\Release\MySql.Data.dll
+E:\0Projects\GenerateGroup\MainForm\obj\x86\Release\MainForm.csprojAssemblyReference.cache
+E:\0Projects\GenerateGroup\MainForm\obj\x86\Release\MainForm.MdlListForm.resources
+E:\0Projects\GenerateGroup\MainForm\obj\x86\Release\MainForm.生成分组.resources
+E:\0Projects\GenerateGroup\MainForm\obj\x86\Release\MainForm.Properties.Resources.resources
+E:\0Projects\GenerateGroup\MainForm\obj\x86\Release\MainForm.csproj.GenerateResource.cache
+E:\0Projects\GenerateGroup\MainForm\obj\x86\Release\MainForm.csproj.CoreCompileInputs.cache
+E:\0Projects\GenerateGroup\MainForm\obj\x86\Release\MainForm.csproj.CopyComplete
+E:\0Projects\GenerateGroup\MainForm\obj\x86\Release\MainForm.exe
+E:\0Projects\GenerateGroup\MainForm\obj\x86\Release\MainForm.pdb

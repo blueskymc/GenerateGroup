@@ -161,6 +161,11 @@ namespace MainForm
 
         #region 其他私有函数
 
+        /// <summary>
+        /// TAB1-打开SQL文本
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonItem2_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
@@ -177,7 +182,7 @@ namespace MainForm
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("读取SQL出错: " + ex.Message);
+                    MessageBox.Show("TAB1-打开SQL文本-读取SQL出错: " + ex.Message);
                 }
             }
         }
@@ -1751,7 +1756,11 @@ namespace MainForm
         #endregion
 
         #region 根据两个SQL生成新文件
-
+        /// <summary>
+        /// 打开前一个SQL文件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonItem6_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
@@ -1766,11 +1775,15 @@ namespace MainForm
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("读取SQL出错: " + ex.Message);
+                    MessageBox.Show("打开前一个SQL文件-读取SQL出错: " + ex.Message);
                 }
             }
         }
-
+        /// <summary>
+        /// 打开后一个SQL文件
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonItem7_Click(object sender, EventArgs e)
         {
             OpenFileDialog open = new OpenFileDialog();
@@ -1779,16 +1792,16 @@ namespace MainForm
             open.RestoreDirectory = true;
             if (open.ShowDialog() == DialogResult.OK)
             {
-                try
+                //try
                 {
                     backFileName = open.FileName;
                     getBackInsertList();
                     generateNewSqlByFrontSql(frontFileName);
                 }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("读取SQL出错: " + ex.Message);
-                }
+                //catch (Exception ex)
+                //{
+                //    MessageBox.Show("打开后一个SQL文件-读取SQL出错: " + ex.Message);
+                //}
             }
         }
 
