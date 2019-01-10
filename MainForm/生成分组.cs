@@ -1756,6 +1756,7 @@ namespace MainForm
         #endregion
 
         #region 根据两个SQL生成新文件
+
         /// <summary>
         /// 打开前一个SQL文件
         /// </summary>
@@ -1779,6 +1780,7 @@ namespace MainForm
                 }
             }
         }
+
         /// <summary>
         /// 打开后一个SQL文件
         /// </summary>
