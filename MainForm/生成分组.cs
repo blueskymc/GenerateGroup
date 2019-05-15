@@ -761,6 +761,10 @@ namespace MainForm
 
         private string addPort(string str, int groupIndex, int rowIndex)
         {
+            if (checkBoxUnadd.Checked)
+            {
+                return str;
+            }
             bool 达旗辅网添加就地 = false;
             if (string.IsNullOrEmpty(str))
                 throw new Exception("存在空端口号或空行，请重新配置");
