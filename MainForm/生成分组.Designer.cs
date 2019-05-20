@@ -87,6 +87,7 @@
             this.itemContainer12 = new DevComponents.DotNetBar.ItemContainer();
             this.labelItem6 = new DevComponents.DotNetBar.LabelItem();
             this.textBoxItem6 = new DevComponents.DotNetBar.TextBoxItem();
+            this.checkBoxUnadd = new DevComponents.DotNetBar.CheckBoxItem();
             this.itemContainer13 = new DevComponents.DotNetBar.ItemContainer();
             this.labelItem7 = new DevComponents.DotNetBar.LabelItem();
             this.textBoxItem7 = new DevComponents.DotNetBar.TextBoxItem();
@@ -246,7 +247,6 @@
             this.superTabControlPanel4 = new DevComponents.DotNetBar.SuperTabControlPanel();
             this.dataGridViewX4 = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.superTabItem4 = new DevComponents.DotNetBar.SuperTabItem();
-            this.checkBoxUnadd = new DevComponents.DotNetBar.CheckBoxItem();
             this.ribbonControl1.SuspendLayout();
             this.ribbonPanel2.SuspendLayout();
             this.ribbonPanel3.SuspendLayout();
@@ -900,6 +900,13 @@
             this.textBoxItem6.TextBoxWidth = 100;
             this.textBoxItem6.WatermarkColor = System.Drawing.SystemColors.GrayText;
             this.textBoxItem6.WatermarkText = "南通1组";
+            // 
+            // checkBoxUnadd
+            // 
+            this.checkBoxUnadd.Checked = true;
+            this.checkBoxUnadd.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxUnadd.Name = "checkBoxUnadd";
+            this.checkBoxUnadd.Text = "端口号不累加";
             // 
             // itemContainer13
             // 
@@ -2757,13 +2764,6 @@
             this.superTabItem4.Name = "superTabItem4";
             this.superTabItem4.Text = "Student";
             // 
-            // checkBoxUnadd
-            // 
-            this.checkBoxUnadd.Checked = true;
-            this.checkBoxUnadd.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxUnadd.Name = "checkBoxUnadd";
-            this.checkBoxUnadd.Text = "端口号不累加";
-            // 
             // 生成分组
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -2773,7 +2773,7 @@
             this.Controls.Add(this.ribbonControl1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "生成分组";
-            this.Text = "分组生成工具 V1.6";
+            this.Text = "分组生成工具 V1.7";
             this.ribbonControl1.ResumeLayout(false);
             this.ribbonControl1.PerformLayout();
             this.ribbonPanel2.ResumeLayout(false);
