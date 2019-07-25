@@ -2579,7 +2579,7 @@ namespace MainForm
             superTabItem5.Visible = false;
             superTabItem6.Visible = false;
             UserConfigTab.Visible = true;
-            OperateDbSem sem = new OperateDbSem();
+            OperateDbSem sem = new OperateDbSem(textBoxPW.Text);
             List<string> nameList = OperateDbSem.GetModelNames();
             DataGridViewComboBoxColumn modelCombo = dataGvUserConfig.Columns[2] as DataGridViewComboBoxColumn;
             //modelCombo.Items.AddRange(nameList);
@@ -2684,8 +2684,10 @@ namespace MainForm
 
         private void buttonItem21_Click(object sender, EventArgs e)
         {
+            List<UserConfigClass> users = new List<UserConfigClass>();
             dataGvUserConfig.EndEdit();
-            string txtName = verifyInput();
+            //string txtName = verifyInput();
+            string txtName = "ssss";
             if (string.IsNullOrEmpty(txtName))
                 return;
             using (StreamWriter sw = new StreamWriter(string.Format("学员\\{0}.csv", txtName), false, encode))
@@ -2700,19 +2702,20 @@ namespace MainForm
                         uc.loginId = row.Cells[0].Value.ToString();
                         uc.name = row.Cells[1].Value.ToString();
                         uc.modelName = modelName;
-                        int sid = OperateDbSem.GetStudentIdByName(uc.name);
-                        if (sid > 0)
-                        {
-                            MessageBox.Show("已存在学员名：" + uc.name + "；请重新输入");
-                        }
-                        int uid = OperateDbSem.GetUserIdByUid(uc.loginId);
-                        if (uid > 0)
-                        {
-                            MessageBox.Show("已存在学员登录号：" + uc.loginId + "；请重新输入");
-                        }
+                        //int sid = OperateDbSem.GetStudentIdByName(uc.name);
+                        //if (sid > 0)
+                        //{
+                        //    MessageBox.Show("已存在学员名：" + uc.name + "；请重新输入");
+                        //}
+                        //int uid = OperateDbSem.GetUserIdByUid(uc.loginId);
+                        //if (uid > 0)
+                        //{
+                        //    MessageBox.Show("已存在学员登录号：" + uc.loginId + "；请重新输入");
+                        //}
                         try
                         {
-                            OperateDbSem.InsertToSql(uc);
+                            //OperateDbSem.InsertToSql(uc);
+                            users.Add(uc);
                             sw.WriteLine(string.Format("{0},{1},{2}", uc.loginId, uc.name, uc.modelName));
                         }
                         catch (Exception ex)
@@ -2726,6 +2729,14 @@ namespace MainForm
                         row.Selected = true;
                     }
                 }
+            try
+            {
+                OperateDbSem.InsertUsersToSql(users);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
 
             MessageBox.Show("已存入学员信息，请关闭该程序！");
         }

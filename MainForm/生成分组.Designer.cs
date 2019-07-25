@@ -247,6 +247,10 @@
             this.superTabControlPanel4 = new DevComponents.DotNetBar.SuperTabControlPanel();
             this.dataGridViewX4 = new DevComponents.DotNetBar.Controls.DataGridViewX();
             this.superTabItem4 = new DevComponents.DotNetBar.SuperTabItem();
+            this.ribbonBar17 = new DevComponents.DotNetBar.RibbonBar();
+            this.itemContainer54 = new DevComponents.DotNetBar.ItemContainer();
+            this.数据库密码 = new DevComponents.DotNetBar.LabelItem();
+            this.textBoxPW = new DevComponents.DotNetBar.TextBoxItem();
             this.ribbonControl1.SuspendLayout();
             this.ribbonPanel2.SuspendLayout();
             this.ribbonPanel3.SuspendLayout();
@@ -278,8 +282,8 @@
             this.ribbonControl1.BackgroundStyle.Class = "";
             this.ribbonControl1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.ribbonControl1.Controls.Add(this.ribbonPanel2);
-            this.ribbonControl1.Controls.Add(this.ribbonPanel3);
             this.ribbonControl1.Controls.Add(this.ribbonPanel4);
+            this.ribbonControl1.Controls.Add(this.ribbonPanel3);
             this.ribbonControl1.Controls.Add(this.ribbonPanel1);
             this.ribbonControl1.Dock = System.Windows.Forms.DockStyle.Top;
             this.ribbonControl1.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
@@ -1700,6 +1704,7 @@
             // ribbonPanel4
             // 
             this.ribbonPanel4.ColorSchemeStyle = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonPanel4.Controls.Add(this.ribbonBar17);
             this.ribbonPanel4.Controls.Add(this.ribbonBar18);
             this.ribbonPanel4.Controls.Add(this.ribbonBar16);
             this.ribbonPanel4.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -2764,6 +2769,64 @@
             this.superTabItem4.Name = "superTabItem4";
             this.superTabItem4.Text = "Student";
             // 
+            // ribbonBar17
+            // 
+            this.ribbonBar17.AutoOverflowEnabled = true;
+            // 
+            // 
+            // 
+            this.ribbonBar17.BackgroundMouseOverStyle.Class = "";
+            this.ribbonBar17.BackgroundMouseOverStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBar17.BackgroundStyle.Class = "";
+            this.ribbonBar17.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonBar17.ContainerControlProcessDialogKey = true;
+            this.ribbonBar17.Dock = System.Windows.Forms.DockStyle.Left;
+            this.ribbonBar17.Items.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.itemContainer54});
+            this.ribbonBar17.Location = new System.Drawing.Point(1085, 0);
+            this.ribbonBar17.Name = "ribbonBar17";
+            this.ribbonBar17.Size = new System.Drawing.Size(100, 123);
+            this.ribbonBar17.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.ribbonBar17.TabIndex = 7;
+            this.ribbonBar17.Text = "ribbonBar17";
+            // 
+            // 
+            // 
+            this.ribbonBar17.TitleStyle.Class = "";
+            this.ribbonBar17.TitleStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonBar17.TitleStyleMouseOver.Class = "";
+            this.ribbonBar17.TitleStyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // itemContainer54
+            // 
+            // 
+            // 
+            // 
+            this.itemContainer54.BackgroundStyle.Class = "";
+            this.itemContainer54.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.itemContainer54.LayoutOrientation = DevComponents.DotNetBar.eOrientation.Vertical;
+            this.itemContainer54.Name = "itemContainer54";
+            this.itemContainer54.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.数据库密码,
+            this.textBoxPW});
+            // 
+            // 数据库密码
+            // 
+            this.数据库密码.Name = "数据库密码";
+            this.数据库密码.Text = "数据库密码";
+            // 
+            // textBoxPW
+            // 
+            this.textBoxPW.Name = "textBoxPW";
+            this.textBoxPW.Text = "sinosimu";
+            this.textBoxPW.WatermarkColor = System.Drawing.SystemColors.GrayText;
+            // 
             // 生成分组
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
@@ -3012,6 +3075,10 @@
         private DevComponents.DotNetBar.LabelItem labelItem49;
         private DevComponents.DotNetBar.CheckBoxItem checkBoxAdd2;
         private DevComponents.DotNetBar.CheckBoxItem checkBoxUnadd;
+        private DevComponents.DotNetBar.RibbonBar ribbonBar17;
+        private DevComponents.DotNetBar.ItemContainer itemContainer54;
+        private DevComponents.DotNetBar.LabelItem 数据库密码;
+        private DevComponents.DotNetBar.TextBoxItem textBoxPW;
     }
 }
 

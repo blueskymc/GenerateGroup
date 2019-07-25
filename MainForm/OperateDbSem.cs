@@ -11,6 +11,11 @@ namespace MainForm
         public static string Conn = "Database='db_sem';Data Source='localhost';User Id='root';Password='sinosimu';charset='utf8';pooling=true";
         //public static string Conn = "Database='db_sem';Data Source='localhost';User Id='root';Password='123456';charset='utf8';pooling=true";
 
+        public OperateDbSem(string password)
+        {
+            Conn = string.Format("Database='db_sem';Data Source='localhost';User Id='root';Password='{0}';charset='utf8';pooling=true", password);
+        }
+
         public static List<string> GetModelNames()
         {
             List<string> strList = new List<string>();
@@ -43,6 +48,68 @@ namespace MainForm
                     break;
             }
             return strList;
+        }
+
+        public static List<string> InsertUsersToSql(List<UserConfigClass> users)
+        {
+            List<string> errs = new List<string>();
+            try
+            {
+                using (MySqlConnection conn = new MySqlConnection(Conn))
+                {
+                    conn.Open();
+                    MySqlTransaction transaction = conn.BeginTransaction();
+
+                    try
+                    {
+                        List<string> sqls = getSqls(users);
+                        foreach (var sql in sqls)
+                        {
+                            int count = MySqlHelper.ExecuteNonQuery(transaction, CommandType.Text, sql, null);
+                            errs.Add("插入语句后，影响行数：" + count);
+                        }
+                        transaction.Commit();
+                    }
+                    catch (Exception ex)
+                    {
+                        try
+                        {
+                            transaction.Rollback();
+                        }
+                        catch
+                        {
+                            throw;
+                        }
+                        throw ex;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            return errs;
+        }
+
+        private static List<string> getSqls(List<UserConfigClass> users)
+        {
+            List<string> sqls = new List<string>();
+            int maxUserId = getMaxId("tb_user") + 1;
+            string sqlUser = "INSERT INTO `tb_user` VALUES ";
+            string sqlStudent = "INSERT INTO `tb_student` VALUES ";
+            foreach (var usr in users)
+            {
+                sqlUser += string.Format("({0},'{1}','','STUDENT',NULL,1,NULL,NULL,NULL,'OFF'),",
+                                                            maxUserId, usr.loginId);
+                sqlStudent += string.Format("({0},'{1}','{2}',20,'MALE','-','',1,'-',0),",
+                                                            maxUserId, usr.loginId, usr.name);
+                maxUserId++;
+            }
+            sqlUser = sqlUser.Remove(sqlUser.Length - 1) + ";";
+            sqlStudent = sqlStudent.Remove(sqlStudent.Length - 1) + ";";
+            sqls.Add(sqlUser);
+            sqls.Add(sqlStudent);
+            return sqls;
         }
 
         public static List<string> InsertToSql(UserConfigClass uc)
